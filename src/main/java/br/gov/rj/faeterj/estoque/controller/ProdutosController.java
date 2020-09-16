@@ -17,7 +17,7 @@ public class ProdutosController {
 
 	// Método GET
 	@RequestMapping("/produtos/novo")
-	public String novo() {
+	public String novo(Produto produto) {
 		return "produto/CadastroProduto";
 	}
 	
@@ -25,15 +25,8 @@ public class ProdutosController {
 	@RequestMapping(value = "/produtos/novo", method = RequestMethod.POST)
 	public String cadastrar(@Valid Produto produto, BindingResult result, 
 			Model model, RedirectAttributes attributes) {
-		if (result.hasFieldErrors("sku")) {
-			model.addAttribute("mensagem", "O campo SKU não pode ficar em branco!");
-			return "produto/CadastroProduto";
-		} if (result.hasFieldErrors("nome")) {
-			model.addAttribute("mensagem", "O campo Nome precisa conter três ou mais caracteres!");
-			return "produto/CadastroProduto";
-		} if(result.hasFieldErrors("descricao")) {
-			model.addAttribute("mensagem", "A descrição não pode estar vazia, nem ultrapassar 50 caracteres!");
-			return "produto/CadastroProduto";
+		if(result.hasErrors()) {
+			return novo(produto);
 		}
 		
 		//Salvar no banco de dados

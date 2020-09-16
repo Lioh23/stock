@@ -2,26 +2,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <body>
-	<h1>Hello World! Thymeleaf configurado!</h1>
+	<h1>Cadastro de Produto</h1>
 	
-	<form method="POST">
+	<div th:each="erro : ${#fields.detailedErrors('${produto.*}')}">
+		<span th:text="${erro.message}"></span>
+	</div>
+	
+	<form method="POST" th:object="${produto}">
 	
 		<span th:text="${mensagem}"></span>
 		
-		<br><br>
+		<br>
 		
 		<label for="sku">SKU</label>
-		<input type="text" id="sku" name="sku">
+		<input type="text" id="sku" th:field="*{sku}">
 		
 		<br><br>
 		
 		<label for="nome">Nome</label>
-		<input type="text" id="nome" name="nome">
+		<input type="text" id="nome" th:field="*{nome}">
 	
 		<br><br>
 		
 		<label for="descricao">Descrição</label>
-		<textarea id="descricao" name="descricao"></textarea>
+		<textarea  rows="3" cols="30" id="descricao" th:field="*{descricao}"></textarea>
 		
 		<br><br>
 	
