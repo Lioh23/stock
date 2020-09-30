@@ -5,6 +5,9 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import br.gov.rj.faeterj.estoque.validation.AtributoSku;
+
+//@AtributoSku(atributo = "sku", message = "SKU inválido")
 public class Produto {
 
 	@NotBlank(message = "SKU é obrigatório!")
